@@ -1,7 +1,6 @@
 local M={}
 local vim = vim
 
--- yankpath: copy current path to clipboard
 function M.yankpath()
   local fp = vim.call('expand', '%:p')
   fp = fp:gsub(vim.call('expand', '~'), "~")
@@ -20,5 +19,10 @@ function M.yankpath()
   end
 end
 
-return M
+function M.remove_file()
+  local f =  vim.fn.expand("%")
+  print("rm", f)
+  os.remove(f)
+end
 
+return M

@@ -1,0 +1,9 @@
+Personal utils for neovim. All lazyloaded for faster startuptime.
+
+    :Chomp | remove trailing whitespaces
+    :YankPath | copy current path in form of filename:linenr
+    :Highlight | find highlight in current context
+    :EX | chmod +x current buffer
+    :Root | Change directory to the root of the Git repository
+    :CD | cd to current buffer located
+    :Remove | remove(from filesystem), close current buffer 

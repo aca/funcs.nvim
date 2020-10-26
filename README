@@ -7,3 +7,5 @@ Personal utils for neovim. All lazyloaded for faster startuptime.
     :Root | Change directory to the root of the Git repository
     :CD | cd to current buffer located
     :Remove | remove(from filesystem), close current buffer 
+    :Rename <ARG> | rename file to <ARG>
+    :Mkdir <ARG> | mkdir -p <ARG>

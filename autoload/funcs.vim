@@ -34,9 +34,3 @@ function funcs#cd()
   execute ":lcd ". expand("%:p:h")
   echon 'pwd: ' . expand("%:p:h")
 endfunction
-
-function funcs#remove()
-  lua require'funcs'.remove_file()
-  bd!
-endfunction
-

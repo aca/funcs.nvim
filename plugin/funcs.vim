@@ -2,7 +2,6 @@
 command! Chomp call funcs#chomp()
 
 " :YankPath | copy current path in form of filename:linenr
-" command! YankPath :lua require'funcs'.yankpath()
 command! YankPath :lua require'funcs.nvim'.yankpath()
 
 " :Highlight | find highlight in current context
@@ -18,4 +17,10 @@ command! Root call funcs#root()
 command! CD call funcs#cd()
 
 " :Remove | remove(from filesystem), close current buffer 
-command! Remove call funcs#remove()
+command! Remove :lua require'funcs.nvim'.remove_file()
+
+" :Rename ARG | rename
+command! -nargs=1 Rename :lua require'funcs.nvim'.rename(<f-args>)
+
+" :Mkdir ARG | mkdir -p
+command! -nargs=1 Mkdir :call mkdir(<f-args>, 'p')

@@ -35,5 +35,34 @@ function M.rename(newname)
   vim.api.nvim_exec('e ' .. newname, true)
 end
 
+function M.open_nextfile()
+  local lst = vim.fn.systemlist("ls | sort")
+  local index={}
+  for k,v in pairs(lst) do
+     index[v]=k
+  end
+
+  local cur_idx = index[vim.fn.expand("%")]
+  if cur_idx == nil or lst[cur_idx+1] == nil then
+    print("open_nextfile: reached end")
+    return
+  end
+  vim.api.nvim_exec('e ' .. lst[cur_idx+1], true)
+end
+
+function M.open_prevfile()
+  local lst = vim.fn.systemlist("ls | sort")
+  local index={}
+  for k,v in pairs(lst) do
+     index[v]=k
+  end
+
+  local cur_idx = index[vim.fn.expand("%")]
+  if cur_idx == nil or lst[cur_idx-1] == nil then
+    print("open_prevfile: reached end")
+    return
+  end
+  vim.api.nvim_exec('e ' .. lst[cur_idx-1], true)
+end
 
 return M

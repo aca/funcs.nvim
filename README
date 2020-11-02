@@ -1,4 +1,5 @@
 Personal utils for neovim. All lazyloaded for faster startuptime.
+Replaces 'tpope/vim-eunuch', 'tpope/vim-unimpaired'...
 
     :Chomp | remove trailing whitespaces
     :YankPath | copy current path in form of filename:linenr
@@ -9,3 +10,7 @@ Personal utils for neovim. All lazyloaded for faster startuptime.
     :Remove | remove(from filesystem), close current buffer 
     :Rename <ARG> | rename file to <ARG>
     :Mkdir <ARG> | mkdir -p <ARG>
+    :PrevFile | open previous file in 'ls | sort'
+    :NextFile | open next file in 'ls | sort'
+
+

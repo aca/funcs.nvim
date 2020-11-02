@@ -24,3 +24,9 @@ command! -nargs=1 Rename :lua require'funcs.nvim'.rename(<f-args>)
 
 " :Mkdir ARG | mkdir -p
 command! -nargs=1 Mkdir :call mkdir(<f-args>, 'p')
+
+" :NextFile | open next file in 'ls | sort'
+command! NextFile :lua require'funcs.nvim'.open_nextfile()
+
+" :PrevFile | open previous file in 'ls | sort'
+command! PrevFile :lua require'funcs.nvim'.open_prevfile()

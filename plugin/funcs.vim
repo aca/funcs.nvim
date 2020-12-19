@@ -20,7 +20,7 @@ command! CD call funcs#cd()
 command! Remove :lua require'funcs.nvim'.remove_file()
 
 " :Rename ARG | rename
-command! -nargs=1 Rename :lua require'funcs.nvim'.rename(<f-args>)
+command! -nargs=1 -complete=dir Rename :lua require'funcs.nvim'.rename(<f-args>)
 
 " :Mkdir ARG | mkdir -p
 command! -nargs=1 Mkdir :call mkdir(<f-args>, 'p')
@@ -30,3 +30,5 @@ command! NextFile :lua require'funcs.nvim'.open_nextfile()
 
 " :PrevFile | open previous file in 'ls | sort'
 command! PrevFile :lua require'funcs.nvim'.open_prevfile()
+
+command! DelMarksAll :delm! | delm A-Z0-9

@@ -36,33 +36,45 @@ function M.rename(newname)
 end
 
 function M.open_nextfile()
-  local lst = vim.fn.systemlist("ls | sort")
+  local cwd = vim.fn.expand('%:p:h')
+  local lst = vim.fn.systemlist("cd " .. cwd .. ' && find . -maxdepth 1 -not -type d | sort | sed -e "s/^.\\///" ')
   local index={}
   for k,v in pairs(lst) do
      index[v]=k
   end
 
-  local cur_idx = index[vim.fn.expand("%")]
-  if cur_idx == nil or lst[cur_idx+1] == nil then
+  local cur_idx = index[vim.fn.expand("%:t")]
+  if cur_idx == nil then
+    -- file not saved
+    vim.api.nvim_exec('e ' .. cwd .. '/' .. lst[#lst], true)
+    return
+  end
+  if lst[cur_idx+1] == nil then
     print("open_nextfile: reached end")
     return
   end
-  vim.api.nvim_exec('e ' .. lst[cur_idx+1], true)
+  vim.api.nvim_exec('e ' .. cwd .. '/' .. lst[cur_idx+1], true)
 end
 
 function M.open_prevfile()
-  local lst = vim.fn.systemlist("ls | sort")
+  local cwd = vim.fn.expand('%:p:h')
+  local lst = vim.fn.systemlist("cd " .. cwd .. ' && find . -maxdepth 1 -not -type d | sort | sed -e "s/^.\\///" ')
   local index={}
   for k,v in pairs(lst) do
      index[v]=k
   end
 
-  local cur_idx = index[vim.fn.expand("%")]
-  if cur_idx == nil or lst[cur_idx-1] == nil then
+  local cur_idx = index[vim.fn.expand("%:t")]
+  if cur_idx == nil then
+    -- file not saved
+    vim.api.nvim_exec('e ' .. cwd .. '/' .. lst[#lst], true)
+    return
+  end
+  if lst[cur_idx-1] == nil then
     print("open_prevfile: reached end")
     return
   end
-  vim.api.nvim_exec('e ' .. lst[cur_idx-1], true)
+  vim.api.nvim_exec('e ' .. cwd .. '/' .. lst[cur_idx-1], true)
 end
 
 return M

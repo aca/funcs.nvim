@@ -32,3 +32,5 @@ command! NextFile :lua require'funcs.nvim'.open_nextfile()
 command! PrevFile :lua require'funcs.nvim'.open_prevfile()
 
 command! DelMarksAll :delm! | delm A-Z0-9
+
+command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis

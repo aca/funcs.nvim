@@ -34,3 +34,35 @@ function funcs#cd()
   execute ":lcd ". expand("%:p:h")
   echon 'pwd: ' . expand("%:p:h")
 endfunction
+
+function funcs#plug_help_sink(line)
+  let dir = g:plugs[a:line].dir
+  for pat in ['doc/*.txt', 'README.md']
+    let match = get(split(globpath(dir, pat), "\n"), 0, '')
+    if len(match)
+      execute 'tabedit' match
+      return
+    endif
+  endfor
+  tabnew
+  execute 'Explore' dir
+endfunction
+
+function! funcs#VisSort(isnmbr) range abort
+	if visualmode() !=# "\<c-v>"
+		execute 'silent! '.a:firstline.','.a:lastline.'sort i'
+		return
+	endif
+	let firstline = line("'<")
+	let lastline  = line("'>")
+	let keeprega  = @a
+	execute 'silent normal! gv"ay'
+	execute "'<,'>s/^/@@@/"
+	execute "silent! keepjumps normal! '<0\"aP"
+	if a:isnmbr
+		execute "silent! '<,'>s/^\s\+/\=substitute(submatch(0),' ','0','g')/"
+	endif
+	execute "sil! keepj '<,'>sort i"
+	execute 'sil! keepj '.firstline.','.lastline.'s/^.\{-}@@@//'
+	let @a = keeprega
+endfunction

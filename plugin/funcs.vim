@@ -34,3 +34,8 @@ command! PrevFile :lua require'funcs.nvim'.open_prevfile()
 command! DelMarksAll :delm! | delm A-Z0-9
 
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
+
+command! PlugHelp call fzf#run(fzf#wrap({ 'source': sort(keys(g:plugs)), 'sink': function('funcs#plug_help_sink')}))
+
+" Sort by selected(visual) column, by Gavin Freeborn
+command! -range -nargs=0 -bang SortVis sil! keepj <line1>,<line2>call funcs#VisSort(<bang>0)
